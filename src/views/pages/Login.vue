@@ -11,15 +11,15 @@
                   <p class="text-muted">Acesse sua conta</p>
                   <b-input-group class="mb-3">
                     <b-input-group-prepend><b-input-group-text><i class="icon-user"></i></b-input-group-text></b-input-group-prepend>
-                    <b-form-input type="text" class="form-control" placeholder="usuario" autocomplete="username email" />
+                    <b-form-input type="text" class="form-control" placeholder="usuario" autocomplete="username" v-model="username" />
                   </b-input-group>
                   <b-input-group class="mb-4">
                     <b-input-group-prepend><b-input-group-text><i class="icon-lock"></i></b-input-group-text></b-input-group-prepend>
-                    <b-form-input type="password" class="form-control" placeholder="senha" autocomplete="current-password" />
+                    <b-form-input type="password" class="form-control" placeholder="senha" autocomplete="current-password" v-model="password" />
                   </b-input-group>
                   <b-row>
                     <b-col cols="6">
-                      <b-button variant="primary" class="px-4">Login</b-button>
+                      <b-button variant="primary" class="px-4" @click="login()" >Login</b-button>
                     </b-col>
                     <b-col cols="6" class="text-right">
                       <b-button variant="link" class="px-0">Esqueceu a senha?</b-button>
@@ -36,7 +36,29 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
-  name: 'Login'
+  name: 'Login',
+  data () {
+    return {
+      username:'',
+      password:''
+    }
+  },
+  methods:{
+    login(){
+      axios.post(`http://gd-back.local/api/v1/login`, {
+        username: this.username,
+        password: this.password
+      })
+      .then(response => {
+        console.log(response.data.token)
+      })
+      .catch(e => {
+        console.log(e)
+      })
+    }
+  }
 }
 </script>
