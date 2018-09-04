@@ -46,8 +46,16 @@ import axios from 'axios';
 
 export default {
   name: 'Login',
+  created () {
+    let user = localStorage.getItem('user')
+    if (user) {
+      this.user = user
+      this.$router.push('/')
+    }
+  },
   data () {
     return {
+      user: false,
       username:'',
       password:'',
       showAlert: false,
@@ -64,11 +72,10 @@ export default {
         password: this.password
       })
       .then(response => {
-        localStorage.setItem('coblueToken', response.data.token);
+        localStorage.setItem('user', JSON.stringify(response.data.user));
         this.$router.push('/');
       })
       .catch(e => {
-        console.log(e);
         this.showAlert = true;
       })
       .finally(() => { 
