@@ -56,7 +56,7 @@ export default new Router({
           ]
         }
       ]
-    },,
+    },
     {
       path: '/pages',
       redirect: '/pages/404',

@@ -58,6 +58,12 @@ import DefaultHeaderDropdownAccnt from './DefaultHeaderDropdownAccnt'
 
 export default {
   name: 'full',
+  created () {
+    let user = localStorage.getItem('user')
+    if (!user) {
+      this.$router.push('/pages/login')
+    }
+  },
   components: {
     AsideToggler,
     AppHeader,
