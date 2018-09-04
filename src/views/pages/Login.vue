@@ -42,20 +42,18 @@
 </template>
 
 <script>
-import axios from 'axios';
+import api from '@/api';
 
 export default {
   name: 'Login',
   created () {
     let user = localStorage.getItem('user')
     if (user) {
-      this.user = user
       this.$router.push('/')
     }
   },
   data () {
     return {
-      user: false,
       username:'',
       password:'',
       showAlert: false,
@@ -66,13 +64,14 @@ export default {
     login(){
       this.isLoading = true;
       this.showAlert = false;
-
-      axios.post('http://gd-back.local/api/v1/login', {
+      api.post('/login', {
         username: this.username,
         password: this.password
       })
       .then(response => {
-        localStorage.setItem('user', JSON.stringify(response.data.user));
+        const user = response.data.user;
+        api.defaults.headers.common['Authorization'] = 'Bearer ' + user.token;
+        localStorage.setItem('user', JSON.stringify(user));
         this.$router.push('/');
       })
       .catch(e => {
