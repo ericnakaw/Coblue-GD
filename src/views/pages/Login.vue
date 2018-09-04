@@ -59,16 +59,16 @@ export default {
       this.isLoading = true;
       this.showAlert = false;
 
-
-      axios.post(`http://gd-back.local/api/v1/login`, {
+      axios.post('http://gd-back.local/api/v1/login', {
         username: this.username,
         password: this.password
       })
       .then(response => {
-        localStorage.setItem("coblueToken", response.data.token);
-        
+        localStorage.setItem('coblueToken', response.data.token);
+        this.$router.push('/');
       })
       .catch(e => {
+        console.log(e);
         this.showAlert = true;
       })
       .finally(() => { 
