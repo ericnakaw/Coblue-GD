@@ -17,6 +17,7 @@ const User = () => import('@/views/users/User')
 const Login = () => import('@/views/pages/Login')
 const Page404 = () => import('@/views/pages/Page404')
 const Page500 = () => import('@/views/pages/Page500')
+const Datatables = () => import('@/views/pages/Datatables')
 
 Vue.use(Router)
 
@@ -79,6 +80,11 @@ export default new Router({
           path: 'login',
           name: 'Login',
           component: Login
+        },
+        {
+          path: 'datatables',
+          name: 'Datatables',
+          component: Datatables
         }
       ]
     }
