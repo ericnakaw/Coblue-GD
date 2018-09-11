@@ -18,6 +18,7 @@ const Login = () => import('@/views/pages/Login')
 const Page404 = () => import('@/views/pages/Page404')
 const Page500 = () => import('@/views/pages/Page500')
 const Datatables = () => import('@/views/pages/Datatables')
+const DatatablesAdvanced = () => import('@/views/pages/advanced/DatatablesAdvanced')
 
 Vue.use(Router)
 
@@ -85,6 +86,11 @@ export default new Router({
           path: 'datatables',
           name: 'Datatables',
           component: Datatables
+        },
+        {
+          path: 'advanced/datatables',
+          name: 'DatatablesAdvanced',
+          component: DatatablesAdvanced
         }
       ]
     }
