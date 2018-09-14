@@ -8,10 +8,12 @@ import Vue from 'vue'
 import BootstrapVue from 'bootstrap-vue'
 import App from './App'
 import router from './router'
+import DatatableFactory from 'vuejs-datatable';
 
 // todo
 // cssVars()
 
+Vue.use(DatatableFactory);
 Vue.use(BootstrapVue)
 
 /* eslint-disable no-new */

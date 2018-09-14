@@ -1,6 +1,6 @@
 <template>
   <b-row>
-    <b-col cols="12" xl="6">
+    <b-col cols="12" xl="12">
       <transition name="slide">
       <b-card :header="caption">
         <b-table :hover="hover" :striped="striped" :bordered="bordered" :small="small" :fixed="fixed" responsive="sm" :items="items" :fields="fields" :current-page="currentPage" :per-page="perPage" @row-clicked="rowClicked">
@@ -9,9 +9,6 @@
           </template>
           <template slot="name" slot-scope="data">
             <strong>{{data.item.name}}</strong>
-          </template>
-          <template slot="status" slot-scope="data">
-            <b-badge :variant="getBadge(data.item.status)">{{data.item.status}}</b-badge>
           </template>
         </b-table>
         <nav>
@@ -24,7 +21,7 @@
 </template>
 
 <script>
-import usersData from './UsersData'
+import api from '@/api';
 export default {
   name: 'Users',
   props: {
@@ -52,16 +49,30 @@ export default {
       type: Boolean,
       default: false
     }
+	},
+	created () {
+    let user = JSON.parse(localStorage.getItem('user'))
+    api.defaults.headers.common['Authorization'] = 'Bearer ' + user.token;
+    api.get('/users')
+    .then(response => {
+      this.items = response.data.data
+    })
+
   },
-  data: () => {
+  data: () => {	
     return {
-      items: usersData.filter((user) => user.id < 42),
+      items: [],
       fields: [
         {key: 'id'},
         {key: 'name'},
-        {key: 'registered'},
-        {key: 'role'},
-        {key: 'status'}
+        {key: 'username'},
+        {key: 'gender'},
+        {key: 'birth_date'},
+        {key: 'civil_state'},
+        {key: 'email'},
+        {key: 'language'},
+        {key: 'picture'},
+        {key: 'role_name'},
       ],
       currentPage: 1,
       perPage: 5,
@@ -71,12 +82,6 @@ export default {
   computed: {
   },
   methods: {
-    getBadge (status) {
-      return status === 'Active' ? 'success'
-        : status === 'Inactive' ? 'secondary'
-          : status === 'Pending' ? 'warning'
-            : status === 'Banned' ? 'danger' : 'primary'
-    },
     getRowCount (items) {
       return items.length
     },
