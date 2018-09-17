@@ -3,6 +3,7 @@
     <b-col cols="12" xl="12">
       <transition name="slide">
       <b-card :header="caption">
+        <table-filter />
         <b-table :hover="hover" :striped="striped" :bordered="bordered" :small="small" :fixed="fixed" responsive="sm" :items="items" :fields="fields" :current-page="currentPage" :per-page="perPage" @row-clicked="rowClicked">
           <template slot="id" slot-scope="data">
             <strong>{{data.item.id}}</strong>
@@ -22,6 +23,7 @@
 
 <script>
 import api from '@/api';
+import TableFilter from '@/components/TableFilter';
 export default {
   name: 'Users',
   props: {
@@ -93,6 +95,9 @@ export default {
       this.$router.push({path: userLink})
     }
 
+  },
+  components: {
+    TableFilter
   }
 }
 </script>
