@@ -11,6 +11,11 @@
           <template slot="name" slot-scope="data">
             <strong>{{data.item.name}}</strong>
           </template>
+          <template slot="picture" slot-scope="data">
+            <img
+              :src="data.item.picture"
+              class="img-avatar" width="25" height="25"/>
+          </template>
         </b-table>
         <nav>
           <b-pagination size="sm" :total-rows="getRowCount(items)" :per-page="perPage" v-model="currentPage" prev-text="Prev" next-text="Next" hide-goto-end-buttons/>
@@ -53,19 +58,17 @@ export default {
     }
 	},
 	created () {
-    let user = JSON.parse(localStorage.getItem('user'))
-    api.defaults.headers.common['Authorization'] = 'Bearer ' + user.token;
     api.get('/users')
     .then(response => {
       this.items = response.data.data
     })
-
   },
   data: () => {	
     return {
       items: [],
       fields: [
         {key: 'id'},
+        {key: 'picture'},
         {key: 'name'},
         {key: 'username'},
         {key: 'gender'},
@@ -73,7 +76,6 @@ export default {
         {key: 'civil_state'},
         {key: 'email'},
         {key: 'language'},
-        {key: 'picture'},
         {key: 'role_name'},
       ],
       currentPage: 1,

@@ -12,6 +12,7 @@ const Dashboard = () => import('@/views/Dashboard')
 // Users
 const Users = () => import('@/views/users/Users')
 const User = () => import('@/views/users/User')
+const UserForm = () => import('@/views/users/UserForm')
 
 // Views - Pages
 const Login = () => import('@/views/pages/Login')
@@ -37,7 +38,7 @@ export default new Router({
           component: Dashboard
         },
         {
-          path: 'users',
+          path: 'administration/users',
           meta: { label: 'Users'},
           component: {
             render (c) { return c('router-view') }
@@ -48,11 +49,16 @@ export default new Router({
               component: Users,
             },
             {
+              path: 'create',
+              name: 'User Form',
+              component: UserForm,
+            },
+            {
               path: ':id',
               meta: { label: 'User Details'},
               name: 'User',
               component: User,
-            },
+            }
           ]
         }
       ]

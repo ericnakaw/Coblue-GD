@@ -33,7 +33,9 @@
 		</b-col>
 		<b-col md="2" lg="2" class="actions_dropdown">
 			<b-dropdown id="ddown1" text="Actions" class="m-2">
-				<b-dropdown-item @click="create"><i class="fa fa-plus"></i>&nbsp; Create</b-dropdown-item>
+				<b-dropdown-item to="/administration/users/create">
+					<i class="fa fa-plus"></i>&nbsp; Create
+				</b-dropdown-item>
 				<b-dropdown-item><i class="fa fa-file-excel-o"></i>&nbsp; Excel</b-dropdown-item>
 			</b-dropdown>
 		</b-col>
@@ -58,7 +60,6 @@ export default {
 				'picture',
 				'role_name'
 			]
-
     }
 	},
 	methods: {

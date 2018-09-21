@@ -6,16 +6,16 @@ export default {
       icon: 'icon-speedometer'
     },
     {
-      title: true,
-      name: 'Admin',
-      class: '',
-      wrapper: {
-        element: '',
-        attributes: {}
-      }
-    },
-    {
-      divider: true
+      name: 'Administration',
+      url: '',
+      icon: 'fa fa-gears',
+      children: [
+        {
+          name: 'Users',
+          url: '/administration/users',
+          icon: 'fa fa-users'
+        }
+      ]
     }
   ]
 }
